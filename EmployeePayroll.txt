@@ -1,0 +1,41 @@
+#UC1
+SHOW DATABASES;
+CREATE DATABASE payroll_service;
+SELECT DATABASE();
+
+#UC2
+CREATE TABLE employee_payroll;
+CREATE TABLE employee_payroll
+    -> (
+    -> Id    INT unsigned NOT NULL AUTO_INCREMENT,
+    -> Name    VARCHAR(150) NOT NULL,
+    -> Salary    Double NOT NULL,
+    -> Start    DATE NOT NULL,
+    -> PRIMARY KEY    (Id)
+    -> );
+
+#UC3
+DESCRIBE employee_payroll;
+INSERT INTO employee_payroll (Name,Salary,Start) VALUES
+    -> ('Bill',100000.00,'2018-01-03');
+INSERT INTO employee_payroll (Name,Salary,Start) VALUES
+    -> ('Terisa',200000.00,'2019-11-13');
+INSERT INTO employee_payroll (Name,Salary,Start) VALUES
+    -> ('Charlie',300000.00,'2020-05-21');
+
+#UC4
+SELECT * FROM employee_payroll;
+
+#UC5
+SELECT salary FROM employee_payroll WHERE name = 'Bill';
+SELECT * FROM employee_payroll WHERE start BETWEEN CAST('2019-01-03' AS DATE) AND DATE(NOW());
+
+#UC6
+ALTER TABLE employee_payroll ADD Gender CHAR(1) AFTER Name;
+update employee_payroll set gender = 'F' where name = 'Terisa';
+
+#UC7
+Select sum(salary) from employee_payroll where gender = 'M' Group by gender;
+Select avg(salary) from employee_payroll where gender = 'F' Group by gender;
+Select min(salary) from employee_payroll where gender = 'M' Group by gender;
+Select max(salary) from employee_payroll where gender = 'F' Group by gender;
