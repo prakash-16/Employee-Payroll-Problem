@@ -39,3 +39,21 @@ Select sum(salary) from employee_payroll where gender = 'M' Group by gender;
 Select avg(salary) from employee_payroll where gender = 'F' Group by gender;
 Select min(salary) from employee_payroll where gender = 'M' Group by gender;
 Select max(salary) from employee_payroll where gender = 'F' Group by gender;
+
+#UC8
+ALTER TABLE EMPLOYEE_PAYROLL ADD Phone_Number INT(15) AFTER Name;
+ALTER TABLE EMPLOYEE_PAYROLL ADD Address VARCHAR(150) AFTER Phone_Number;
+ALTER TABLE EMPLOYEE_PAYROLL ALTER COLUMN Address SET DEFAULT 'TBD';
+ALTER TABLE EMPLOYEE_PAYROLL ADD Department VARCHAR(150) NOT NULL AFTER Address;
+
+#UC9
+Alter Table employee_payroll RENAME COLUMN Salary to Basic_Pay;
+Alter Table employee_payroll Add Deductions DOUBLE NOT NULL AFTER Basic_Pay;
+Alter Table employee_payroll Add Taxable_Pay DOUBLE NOT NULL AFTER Deductions;
+Alter Table employee_payroll Add Income_Tax DOUBLE NOT NULL AFTER Deductions;
+Alter Table employee_payroll Add Net_Pay DOUBLE NOT NULL AFTER Deductions;
+
+#UC10
+Update employee_payroll set Department = 'Sales' where name = 'Terisa';
+Insert INTO employee_payroll (Name,Department,Gender,Basic_Pay,Deductions,Net_Pay,Income_Tax,Taxable_pay,Start) VALUES
+    -> ('Terisa','Marketing','F',200000,100000,500000,100000,200000,'2019-06-03');
